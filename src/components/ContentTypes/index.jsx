@@ -106,8 +106,47 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
     });
   }
   // eslint-disable-next-line no-unused-vars
-  function editField(contentType, field) {
-    // TODO
+  function editField(field) {
+    const modalFields = {
+      'Field Name': field,
+      'Field Type': selectedContentType.schema[field],
+    };
+
+    setModal({
+      show: true,
+      title: 'Content Type',
+      position: 'center',
+      fields: modalFields,
+      onSave: async (data) => {
+        const newContentType = {
+          name: selectedContentType.name,
+          schema: { ...selectedContentType.schema },
+        };
+        delete newContentType.schema[field];
+        newContentType.schema[data['Field Name']] = data['Field Type'];
+        try {
+          const updatedContentType = await makeRequest(
+            editFormApiEndpoint(selectedContentTypeId),
+            {
+              data: newContentType,
+            }
+          );
+
+          const newContentTypes = contentTypes.map((contentType) => {
+            if (contentType.id === selectedContentTypeId) {
+              return { ...selectedContentType, ...updatedContentType };
+            }
+            return contentType;
+          });
+
+          setContentTypes(newContentTypes);
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+          return false;
+        }
+      },
+    });
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -228,7 +267,7 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
                         style={{
                           margin: '0 8px',
                         }}
-                        onClick={() => editField(selectedContentType, field)}
+                        onClick={() => editField(field)}
                       >
                         <i className='fa-regular fa-pen-to-square' />
                       </button>
