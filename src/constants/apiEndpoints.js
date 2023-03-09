@@ -22,3 +22,8 @@ export const editFormApiEndpoint = (formId) => {
     method: 'PUT',
   };
 };
+
+export const createFormApiEndpoint = {
+  url: BACKEND_SERVER_BASE_URL + '/api/forms',
+  method: 'POST',
+};

@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { editFormApiEndpoint } from '../../constants/apiEndpoints';
+import {
+  createFormApiEndpoint,
+  editFormApiEndpoint,
+} from '../../constants/apiEndpoints';
 import { ErrorContext } from '../../contexts/ErrorContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { makeRequest } from '../../utils/makeRequest';
@@ -61,7 +64,31 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
   const [error, setError] = useContext(ErrorContext);
 
   function addNewContentType() {
-    // TODO
+    setModal({
+      show: true,
+      title: 'Content Type',
+      position: 'center',
+      fields: {
+        'Content Type Name': '',
+      },
+      onSave: async (data) => {
+        try {
+          const newContentType = await makeRequest(createFormApiEndpoint, {
+            data: {
+              name: data['Content Type Name'],
+              schema: {},
+            },
+          });
+
+          setContentTypes([...contentTypes, newContentType]);
+          setSelectedContentTypeId(newContentType.id);
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+          return false;
+        }
+      },
+    });
   }
 
   function addAnotherField() {
