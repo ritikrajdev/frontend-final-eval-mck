@@ -4,6 +4,7 @@ import {
   createFormApiEndpoint,
   editFormApiEndpoint,
 } from '../../constants/apiEndpoints';
+import { ContentContext } from '../../contexts/ContentContext';
 import { ErrorContext } from '../../contexts/ErrorContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { makeRequest } from '../../utils/makeRequest';
@@ -53,7 +54,8 @@ function getTypeBox(type) {
   );
 }
 
-export default function ContentTypes({ contentTypes, setContentTypes }) {
+export default function ContentTypes() {
+  const [contentTypes, setContentTypes] = useContext(ContentContext);
   const [selectedContentTypeId, setSelectedContentTypeId] =
     React.useState(null);
 

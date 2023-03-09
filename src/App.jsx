@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedPage from './components/ProtectedPage';
 import { ERROR_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from './constants/routes';
+import ContentContextProvider from './contexts/ContentContext';
 import ErrorContextProvider from './contexts/ErrorContext';
 import ModalContextProvider from './contexts/ModalContext';
 import ErrorPage from './pages/ErrorPage';
@@ -18,7 +19,9 @@ function App() {
               path={HOME_ROUTE}
               element={
                 <ProtectedPage>
-                  <HomePage />
+                  <ContentContextProvider>
+                    <HomePage />
+                  </ContentContextProvider>
                 </ProtectedPage>
               }
             />

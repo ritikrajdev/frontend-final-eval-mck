@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Collections from '../../components/Collections';
 import ContentTypes from '../../components/ContentTypes';
 import { getAllFormsApiEndpoint } from '../../constants/apiEndpoints';
+import { ContentContext } from '../../contexts/ContentContext';
 import { makeRequest } from '../../utils/makeRequest';
 
 import './HomePage.css';
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [collections, setCollections] = useState(null);
-  const [sideData, setSideData] = useState({
-    // type: 'content' | 'collection',
-    type: false,
-    data: null,
-  });
+  const [collections, setCollections] = useContext(ContentContext);
+
+  // false, 'content', 'collection'
+  const [sideData, setSideData] = useState(false);
 
   useEffect(() => {
     makeRequest(getAllFormsApiEndpoint, {}, navigate).then((forms) => {
@@ -36,7 +35,9 @@ export default function HomePage() {
           <br />
           <ul>
             {collections.map((collection) => (
-              <li key={collection.id}>• {collection.name}</li>
+              <li key={collection.id} onClick={() => setSideData('collection')}>
+                • {collection.name}
+              </li>
             ))}
           </ul>
           <br />
@@ -47,23 +48,14 @@ export default function HomePage() {
           style={{
             cursor: 'pointer',
           }}
-          onClick={() => setSideData({ data: collections, type: 'content' })}
+          onClick={() => setSideData('content')}
         >
           CONTENT TYPE BUILDER
         </h3>
       </div>
       <div className='cms-content'>
-        {sideData.type &&
-          (sideData.type === 'content' ? (
-            <ContentTypes
-              contentTypes={sideData.data}
-              setContentTypes={(newData) => {
-                setSideData({ ...sideData, data: newData });
-              }}
-            />
-          ) : (
-            <Collections />
-          ))}
+        {sideData &&
+          (sideData === 'content' ? <ContentTypes /> : <Collections />)}
       </div>
     </div>
   );
