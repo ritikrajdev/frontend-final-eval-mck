@@ -1,0 +1,9 @@
+.custom-button {
+  min-width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--dark-purple);
+  color: white;
+  cursor: pointer;
+}
