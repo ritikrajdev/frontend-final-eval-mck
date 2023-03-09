@@ -55,7 +55,12 @@ export default function HomePage() {
       <div className='cms-content'>
         {sideData.type &&
           (sideData.type === 'content' ? (
-            <ContentTypes contentTypes={sideData.data} />
+            <ContentTypes
+              contentTypes={sideData.data}
+              setContentTypes={(newData) => {
+                setSideData({ ...sideData, data: newData });
+              }}
+            />
           ) : (
             <Collections />
           ))}

@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+import { editFormApiEndpoint } from '../../constants/apiEndpoints';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import { ModalContext } from '../../contexts/ModalContext';
+import { makeRequest } from '../../utils/makeRequest';
 
 import './ContentTypes.css';
 
@@ -46,9 +50,15 @@ function getTypeBox(type) {
   );
 }
 
-export default function ContentTypes({ contentTypes }) {
+export default function ContentTypes({ contentTypes, setContentTypes }) {
   const [selectedContentTypeId, setSelectedContentTypeId] =
     React.useState(null);
+
+  // eslint-disable-next-line no-unused-vars
+  const [modal, setModal] = useContext(ModalContext);
+
+  // eslint-disable-next-line no-unused-vars
+  const [error, setError] = useContext(ErrorContext);
 
   function addNewContentType() {
     // TODO
@@ -56,7 +66,44 @@ export default function ContentTypes({ contentTypes }) {
 
   // eslint-disable-next-line no-unused-vars
   function addAnotherField(contentType) {
-    // TODO
+    const fields = {
+      'Field Name': '',
+      'Field Type': '',
+    };
+    setModal({
+      show: true,
+      title: 'Content Type',
+      position: 'center',
+      fields: fields,
+      onSave: async (data) => {
+        const newContentType = {
+          name: selectedContentType.name,
+          schema: { ...selectedContentType.schema },
+        };
+        newContentType.schema[data['Field Name']] = data['Field Type'];
+        try {
+          const updatedContentType = await makeRequest(
+            editFormApiEndpoint(selectedContentTypeId),
+            {
+              data: newContentType,
+            }
+          );
+
+          const newContentTypes = contentTypes.map((contentType) => {
+            if (contentType.id === selectedContentTypeId) {
+              return { ...selectedContentType, ...updatedContentType };
+            }
+            return contentType;
+          });
+
+          setContentTypes(newContentTypes);
+
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+        }
+      },
+    });
   }
   // eslint-disable-next-line no-unused-vars
   function editField(contentType, field) {
@@ -188,4 +235,5 @@ export default function ContentTypes({ contentTypes }) {
 
 ContentTypes.propTypes = {
   contentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setContentTypes: PropTypes.func.isRequired,
 };

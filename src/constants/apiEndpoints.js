@@ -15,3 +15,10 @@ export const getAllFormsApiEndpoint = {
   url: BACKEND_SERVER_BASE_URL + '/api/forms',
   method: 'GET',
 };
+
+export const editFormApiEndpoint = (formId) => {
+  return {
+    url: BACKEND_SERVER_BASE_URL + '/api/forms/' + formId,
+    method: 'PUT',
+  };
+};
