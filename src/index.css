@@ -3,6 +3,7 @@
 :root {
   --light-purple: rgb(240 241 255);
   --dark-purple: rgb(94 57 255);
+  --medium-purple: rgb(206 208 225);
 
   --dark-gray: rgb(35 35 35);
   --light-gray: rgb(100 100 100);
@@ -17,6 +18,11 @@
   margin: 0;
   padding: 0;
   color: var(--text-gray);
+}
+
+button {
+  background: transparent;
+  border: none;
 }
 
 body {

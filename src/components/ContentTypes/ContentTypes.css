@@ -1,0 +1,43 @@
+.content-types h2 {
+  padding: 24px 20px;
+  background-color: white;
+}
+
+.types-container {
+  min-height: calc(100vh - 77px);
+  display: flex;
+}
+
+.left-container {
+  flex: 1;
+  background-color: var(--medium-purple);
+  padding: 30px;
+}
+
+.content-types .content-type-button,
+.content-types .add-button {
+  width: 100%;
+  border: none;
+  padding: 12px 8px;
+  font-weight: 600;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: white;
+}
+
+.content-type-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-types .add-button {
+  cursor: pointer;
+  color: var(--dark-purple);
+  border: 2px dotted var(--dark-purple);
+}
+
+.right-container {
+  flex: 2;
+  background-color: var(--light-purple);
+  padding: 30px;
+}

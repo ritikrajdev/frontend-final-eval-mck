@@ -1,0 +1,41 @@
+.home-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.cms-nav {
+  background-color: var(--dark-gray);
+  flex: 1;
+}
+ul {
+  list-style: none;
+}
+
+.collections-containers {
+  padding: 0 20px;
+}
+
+.cms-nav h1 {
+  background-color: var(--dark-purple);
+  color: white;
+  padding: 20px 10px;
+}
+
+.cms-nav h3 {
+  color: white;
+}
+
+.cms-nav li {
+  color: #ffffff99;
+}
+
+.cms-content {
+  background-color: var(--light-purple);
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.build-type-button {
+  padding: 0 20px;
+}
