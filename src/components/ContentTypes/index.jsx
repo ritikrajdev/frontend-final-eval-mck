@@ -64,8 +64,7 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
     // TODO
   }
 
-  // eslint-disable-next-line no-unused-vars
-  function addAnotherField(contentType) {
+  function addAnotherField() {
     const fields = {
       'Field Name': '',
       'Field Type': '',
@@ -101,6 +100,7 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
           return true;
         } catch (err) {
           setError(err.response ? err.response.data.message : err.message);
+          return false;
         }
       },
     });
@@ -111,8 +111,30 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
   }
 
   // eslint-disable-next-line no-unused-vars
-  function deleteField(contentType, field) {
-    // TODO
+  async function deleteField(field) {
+    try {
+      const newSchema = { ...selectedContentType.schema };
+      delete newSchema[field];
+
+      const updatedContentType = await makeRequest(
+        editFormApiEndpoint(selectedContentTypeId),
+        {
+          data: {
+            name: selectedContentType.name,
+            schema: newSchema,
+          },
+        }
+      );
+      const newContentTypes = contentTypes.map((contentType) => {
+        if (contentType.id === selectedContentTypeId) {
+          return { ...selectedContentType, ...updatedContentType };
+        }
+        return contentType;
+      });
+      setContentTypes(newContentTypes);
+    } catch (err) {
+      setError(err.response ? err.response.data.message : err.message);
+    }
   }
 
   let selectedContentType = null;
@@ -169,10 +191,7 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
               <br />
               <p>{Object.keys(selectedContentType.schema).length} fields</p>
               <br />
-              <button
-                className='add-button'
-                onClick={() => addAnotherField(selectedContentType)}
-              >
+              <button className='add-button' onClick={addAnotherField}>
                 Add another Field
               </button>
               <br />
@@ -217,7 +236,7 @@ export default function ContentTypes({ contentTypes, setContentTypes }) {
                         style={{
                           margin: '0 8px',
                         }}
-                        onClick={() => deleteField(selectedContentType, field)}
+                        onClick={() => deleteField(field)}
                       >
                         <i className='fa-regular fa-trash-can' />
                       </button>
