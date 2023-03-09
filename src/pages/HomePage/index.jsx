@@ -11,6 +11,7 @@ import './HomePage.css';
 export default function HomePage() {
   const navigate = useNavigate();
   const [collections, setCollections] = useContext(ContentContext);
+  const [selectedCollectionId, setSelectedCollectionId] = useState(null);
 
   // false, 'content', 'collection'
   const [sideData, setSideData] = useState(false);
@@ -33,9 +34,25 @@ export default function HomePage() {
         <div className='collections-containers'>
           <h3>COLLECTIONS</h3>
           <br />
-          <ul>
+          <ul
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px',
+              maxHeight: '45vh',
+            }}
+          >
             {collections.map((collection) => (
-              <li key={collection.id} onClick={() => setSideData('collection')}>
+              <li
+                key={collection.id}
+                onClick={() => {
+                  setSideData('collection');
+                  setSelectedCollectionId(collection.id);
+                }}
+                style={{
+                  cursor: 'pointer',
+                }}
+              >
                 • {collection.name}
               </li>
             ))}
@@ -55,7 +72,11 @@ export default function HomePage() {
       </div>
       <div className='cms-content'>
         {sideData &&
-          (sideData === 'content' ? <ContentTypes /> : <Collections />)}
+          (sideData === 'content' ? (
+            <ContentTypes />
+          ) : (
+            <Collections collectionId={selectedCollectionId} />
+          ))}
       </div>
     </div>
   );

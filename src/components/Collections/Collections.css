@@ -1,0 +1,48 @@
+.collections > h2 {
+  padding: 24px 20px;
+  background-color: white;
+}
+
+.collections .entries {
+  display: flex;
+  justify-content: space-between;
+}
+
+.collections .entries button {
+  color: var(--dark-purple);
+  font-weight: 600;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.collections i {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.entries-table {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.entries-headings {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.w-150 {
+  width: 150px;
+}
+
+.entries-row {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+}

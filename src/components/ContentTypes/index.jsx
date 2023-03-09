@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import {
   createFormApiEndpoint,
@@ -319,8 +318,3 @@ export default function ContentTypes() {
     </div>
   );
 }
-
-ContentTypes.propTypes = {
-  contentTypes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setContentTypes: PropTypes.func.isRequired,
-};
