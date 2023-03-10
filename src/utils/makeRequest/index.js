@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { ERROR_ROUTE, ERROR_WITH_CODE_ROUTE } from '../../constants/routes';
-import { getAuthToken } from '../auth';
+import {
+  ERROR_ROUTE,
+  ERROR_WITH_CODE_ROUTE,
+  LOGIN_ROUTE,
+} from '../../constants/routes';
+import { getAuthToken, removeAuthToken } from '../auth';
 
 export async function makeRequest(apiEndpoint, dyamicConfig, navigate) {
   dyamicConfig = dyamicConfig ?? {};
@@ -24,6 +28,10 @@ export async function makeRequest(apiEndpoint, dyamicConfig, navigate) {
   } catch (err) {
     if (navigate) {
       if (err.response?.status) {
+        if (err.response.status === 401) {
+          removeAuthToken();
+          navigate(LOGIN_ROUTE);
+        }
         navigate(ERROR_WITH_CODE_ROUTE(err.response.status));
       } else {
         navigate(ERROR_ROUTE);

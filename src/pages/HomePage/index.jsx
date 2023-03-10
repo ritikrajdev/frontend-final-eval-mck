@@ -45,12 +45,17 @@ export default function HomePage() {
             {collections.map((collection) => (
               <li
                 key={collection.id}
+                style={{
+                  cursor: 'pointer',
+                  backgroundColor:
+                    sideData === 'collection' &&
+                    selectedCollectionId === collection.id
+                      ? 'black'
+                      : 'transparent',
+                }}
                 onClick={() => {
                   setSideData('collection');
                   setSelectedCollectionId(collection.id);
-                }}
-                style={{
-                  cursor: 'pointer',
                 }}
               >
                 • {collection.name}
@@ -63,6 +68,7 @@ export default function HomePage() {
         <h3
           className='build-type-button'
           style={{
+            backgroundColor: sideData === 'content' ? 'black' : 'transparent',
             cursor: 'pointer',
           }}
           onClick={() => setSideData('content')}
