@@ -1,13 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import ProtectedPage from './components/ProtectedPage';
-import { ERROR_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from './constants/routes';
+import {
+  ERROR_ROUTE,
+  HOME_ROUTE,
+  LOGIN_ROUTE,
+  REGISTER_ROUTE,
+} from './constants/routes';
 import ContentContextProvider from './contexts/ContentContext';
 import ErrorContextProvider from './contexts/ErrorContext';
 import ModalContextProvider from './contexts/ModalContext';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -26,6 +32,7 @@ function App() {
               }
             />
             <Route path={LOGIN_ROUTE} element={<LoginPage />} />
+            <Route path={REGISTER_ROUTE} element={<RegisterPage />} />
             <Route
               path={`${ERROR_ROUTE}/:errorCode?`}
               element={<ErrorPage />}

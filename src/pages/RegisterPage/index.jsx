@@ -5,17 +5,13 @@ import circleWhite from '../../assets/images/circle_white.svg';
 import uploadIllustration from '../../assets/images/undraw_upload.svg';
 import Button from '../../components/elements/Button';
 import Input from '../../components/elements/Input';
-import { loginApiEndpoint } from '../../constants/apiEndpoints';
-import {
-  ERROR_ROUTE,
-  HOME_ROUTE,
-  REGISTER_ROUTE,
-} from '../../constants/routes';
-import { getAuthToken, setAuthToken } from '../../utils/auth';
+import { registerApiEndpoint } from '../../constants/apiEndpoints';
+import { ERROR_ROUTE, HOME_ROUTE, LOGIN_ROUTE } from '../../constants/routes';
+import { getAuthToken } from '../../utils/auth';
 import { makeRequest } from '../../utils/makeRequest';
-import './LoginPage.css';
+import './RegisterPage.css';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
@@ -23,24 +19,21 @@ export default function LoginPage() {
     if (getAuthToken()) navigate(HOME_ROUTE);
   }, []);
 
-  async function login(e) {
+  async function register(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const email = formData.get('email');
     const password = formData.get('password');
 
     try {
-      const { token } = await makeRequest(loginApiEndpoint, {
+      await makeRequest(registerApiEndpoint, {
         data: {
           email,
           password,
         },
       });
 
-      console.log(token);
-      setAuthToken(token);
-
-      navigate(HOME_ROUTE);
+      navigate(LOGIN_ROUTE);
     } catch (error) {
       console.log(error);
       if (Math.floor(error.response?.status / 100) === 4) {
@@ -52,7 +45,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className='login-page'>
+    <div className='register-page'>
       <div className='app-info'>
         <img
           src={circleWhite}
@@ -96,9 +89,9 @@ export default function LoginPage() {
         />
       </div>
 
-      <div className='login'>
-        <h2>Log in to your account</h2>
-        <form onSubmit={login}>
+      <div className='register'>
+        <h2>Register Now !</h2>
+        <form onSubmit={register}>
           <Input label='Email' type='email' name='email' />
           <br />
           <Input label='Password' type='password' name='password' />
@@ -106,12 +99,12 @@ export default function LoginPage() {
           <p style={{ padding: '0 10px', color: 'red' }}>{error}</p>
           <br />
           <center>
-            <Button type='submit'>Log in</Button>
+            <Button type='submit'>Register</Button>
           </center>
           <br />
           <br />
           <center>
-            <Link to={REGISTER_ROUTE}>register</Link>
+            <Link to={LOGIN_ROUTE}>login</Link>
           </center>
         </form>
       </div>

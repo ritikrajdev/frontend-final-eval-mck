@@ -11,6 +11,11 @@ export const loginApiEndpoint = {
   method: 'POST',
 };
 
+export const registerApiEndpoint = {
+  url: AUTH_SERVER_BASE_URL + '/api/users',
+  method: 'POST',
+};
+
 export const getAllFormsApiEndpoint = {
   url: BACKEND_SERVER_BASE_URL + '/api/forms',
   method: 'GET',
