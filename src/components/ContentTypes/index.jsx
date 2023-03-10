@@ -211,6 +211,43 @@ export default function ContentTypes() {
     );
   }
 
+  function editContentType() {
+    setModal({
+      show: true,
+      title: 'Content Type',
+      position: 'center',
+      fields: {
+        'Content Type Name': selectedContentType.name,
+      },
+      onSave: async (data) => {
+        try {
+          const updatedContentType = await makeRequest(
+            editFormApiEndpoint(selectedContentTypeId),
+            {
+              data: {
+                name: data['Content Type Name'],
+                schema: selectedContentType.schema,
+              },
+            }
+          );
+
+          const newContentTypes = contentTypes.map((contentType) => {
+            if (contentType.id === selectedContentTypeId) {
+              return { ...selectedContentType, ...updatedContentType };
+            }
+            return contentType;
+          });
+
+          setContentTypes(newContentTypes);
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+          return false;
+        }
+      },
+    });
+  }
+
   return (
     <div className='content-types'>
       <h2>Content Types</h2>
@@ -254,7 +291,18 @@ export default function ContentTypes() {
         <div className='right-container'>
           {selectedContentType && (
             <div>
-              <h1>{selectedContentType.name}</h1>
+              <h1>
+                {selectedContentType.name}{' '}
+                <button onClick={editContentType}>
+                  <i
+                    className='fa-solid fa-pen'
+                    style={{
+                      fontSize: '1.2rem',
+                      cursor: 'pointer',
+                    }}
+                  ></i>
+                </button>
+              </h1>
               <br />
               <p>{Object.keys(selectedContentType.schema).length} fields</p>
               <br />
