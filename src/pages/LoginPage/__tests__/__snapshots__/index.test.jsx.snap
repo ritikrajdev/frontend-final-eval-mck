@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginPage renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="login-page"
+  >
+    <div
+      class="app-info"
+    >
+      <img
+        src="circle_white.svg"
+        style="top: 10px; right: 10px;"
+      />
+      <img
+        src="circle_white.svg"
+        style="top: 120px; right: 120px; width: 100px; height: 100px;"
+      />
+      <h1>
+        DESIGN APIs fast,
+        <br />
+        Manage content easily.
+      </h1>
+      <img
+        alt=""
+        class="img-illustration"
+        src="undraw_upload.svg"
+      />
+      <img
+        src="circle_white.svg"
+        style="bottom: 10px; left: 120px; width: 100px; height: 100px;"
+      />
+      <img
+        src="circle_white.svg"
+        style="bottom: 80px; left: 10px;"
+      />
+    </div>
+    <div
+      class="login"
+    >
+      <h2>
+        Log in to your account
+      </h2>
+      <form>
+        <div
+          class="custom-input"
+        >
+          <label>
+            Email
+          </label>
+          <br />
+          <input
+            name="email"
+            type="email"
+            value=""
+          />
+        </div>
+        <br />
+        <div
+          class="custom-input"
+        >
+          <label>
+            Password
+          </label>
+          <br />
+          <input
+            name="password"
+            type="password"
+            value=""
+          />
+        </div>
+        <br />
+        <p
+          style="padding: 0px 10px; color: red;"
+        />
+        <br />
+        <center>
+          <button
+            class="custom-button"
+            type="submit"
+          >
+            Log in
+          </button>
+        </center>
+        <br />
+        <br />
+        <center />
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

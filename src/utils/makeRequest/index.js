@@ -31,8 +31,9 @@ export async function makeRequest(apiEndpoint, dyamicConfig, navigate) {
         if (err.response.status === 401) {
           removeAuthToken();
           navigate(LOGIN_ROUTE);
+        } else {
+          navigate(ERROR_WITH_CODE_ROUTE(err.response.status));
         }
-        navigate(ERROR_WITH_CODE_ROUTE(err.response.status));
       } else {
         navigate(ERROR_ROUTE);
       }

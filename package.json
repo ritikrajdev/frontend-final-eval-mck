@@ -52,7 +52,9 @@
       "src/index.js",
       "src/setupTests.js",
       "src/reportWebVitals.js",
-      "src/setupTests.js"
+      "src/setupTests.js",
+      "src/contexts/",
+      "src/constants"
     ]
   }
 }

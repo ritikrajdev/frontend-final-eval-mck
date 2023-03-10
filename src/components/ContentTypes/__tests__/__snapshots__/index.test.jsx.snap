@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContentType should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="content-types"
+  >
+    <h2>
+      <span>
+        Content Types
+      </span>
+       
+      <button
+        class="sign-out-button"
+      >
+        Sign Out
+      </button>
+    </h2>
+    <div
+      class="types-container"
+    >
+      <div
+        class="left-container"
+      >
+        <p>
+          1 Types
+        </p>
+        <br />
+        <button
+          class="add-button"
+        >
+          + New Type
+        </button>
+        <div>
+          <button
+            class="content-type-button"
+          >
+            <span>
+              Laptops
+            </span>
+            <span>
+              1
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="right-container"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
