@@ -39,3 +39,10 @@ export const editResponseApiEndpoint = (responseId) => {
     method: 'PUT',
   };
 };
+
+export const deleteResponseApiEndpoint = (responseId) => {
+  return {
+    url: BACKEND_SERVER_BASE_URL + '/api/form-responses/' + responseId,
+    method: 'DELETE',
+  };
+};

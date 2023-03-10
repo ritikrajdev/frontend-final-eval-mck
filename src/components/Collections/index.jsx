@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import {
   createResponseApiEndpoint,
+  deleteResponseApiEndpoint,
   editResponseApiEndpoint,
 } from '../../constants/apiEndpoints';
 import { ContentContext } from '../../contexts/ContentContext';
@@ -112,9 +113,26 @@ export default function Collections({ collectionId }) {
     });
   }
 
-  function deleteResponse(id) {
-    // TODO
-    console.log('delete response', id);
+  async function deleteResponse(id) {
+    try {
+      await makeRequest(deleteResponseApiEndpoint(id));
+
+      setContentTypes(
+        contentTypes.map((collection) => {
+          if (collection.id === collectionId) {
+            return {
+              ...collection,
+              formResponses: collection.formResponses.filter(
+                (response) => response.id !== id
+              ),
+            };
+          }
+          return collection;
+        })
+      );
+    } catch (err) {
+      setError(err.response ? err.response.data.message : err.message);
+    }
   }
 
   const schema = selectedCollection.schema;
