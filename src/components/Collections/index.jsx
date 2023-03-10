@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { createResponseApiEndpoint } from '../../constants/apiEndpoints';
+import {
+  createResponseApiEndpoint,
+  editResponseApiEndpoint,
+} from '../../constants/apiEndpoints';
 import { ContentContext } from '../../contexts/ContentContext';
 import { ErrorContext } from '../../contexts/ErrorContext';
 import { ModalContext } from '../../contexts/ModalContext';
@@ -34,11 +37,6 @@ export default function Collections({ collectionId }) {
       position: 'right',
       fields: modalFields,
       onSave: async (data) => {
-        // console.log({
-        //   form_id: selectedCollection.id,
-        //   response: data,
-        // });
-
         try {
           const newResponse = await makeRequest(createResponseApiEndpoint, {
             data: {
@@ -69,8 +67,49 @@ export default function Collections({ collectionId }) {
   }
 
   function editResponse(id) {
-    // TODO
-    console.log('edit response', id);
+    setModal({
+      show: true,
+      title: 'Edit Response',
+      position: 'right',
+      fields: selectedCollection.formResponses.find(
+        (response) => response.id === id
+      ).response,
+      onSave: async (data) => {
+        try {
+          const updatedResponse = await makeRequest(
+            editResponseApiEndpoint(id),
+            {
+              data: {
+                form_id: selectedCollection.id,
+                response: data,
+              },
+            }
+          );
+
+          setContentTypes(
+            contentTypes.map((collection) => {
+              if (collection.id === collectionId) {
+                return {
+                  ...collection,
+                  formResponses: collection.formResponses.map((response) => {
+                    if (response.id === id) {
+                      return updatedResponse;
+                    }
+                    return response;
+                  }),
+                };
+              }
+              return collection;
+            })
+          );
+
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+          return false;
+        }
+      },
+    });
   }
 
   function deleteResponse(id) {

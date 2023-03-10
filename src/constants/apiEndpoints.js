@@ -32,3 +32,10 @@ export const createResponseApiEndpoint = {
   url: BACKEND_SERVER_BASE_URL + '/api/form-responses',
   method: 'POST',
 };
+
+export const editResponseApiEndpoint = (responseId) => {
+  return {
+    url: BACKEND_SERVER_BASE_URL + '/api/form-responses/' + responseId,
+    method: 'PUT',
+  };
+};
