@@ -50,7 +50,6 @@ describe('Collections', () => {
     const typeButton = view.getByText(mockCollections[0].name);
     fireEvent.click(typeButton);
 
-    // await waitFor(() => {});
     expect(view.asFragment()).toMatchSnapshot();
   });
 });
