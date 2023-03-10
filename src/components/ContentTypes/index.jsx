@@ -81,6 +81,8 @@ export default function ContentTypes() {
             },
           });
 
+          newContentType.formResponses = [];
+
           setContentTypes([...contentTypes, newContentType]);
           setSelectedContentTypeId(newContentType.id);
           return true;
