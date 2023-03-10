@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
+import { createResponseApiEndpoint } from '../../constants/apiEndpoints';
 import { ContentContext } from '../../contexts/ContentContext';
+import { ErrorContext } from '../../contexts/ErrorContext';
+import { ModalContext } from '../../contexts/ModalContext';
+import { makeRequest } from '../../utils/makeRequest';
 
 import './Collections.css';
 
@@ -8,13 +12,60 @@ export default function Collections({ collectionId }) {
   // eslint-disable-next-line no-unused-vars
   const [contentTypes, setContentTypes] = useContext(ContentContext);
 
+  // eslint-disable-next-line no-unused-vars
+  const [error, setError] = useContext(ErrorContext);
+
+  // eslint-disable-next-line no-unused-vars
+  const [modal, setModal] = useContext(ModalContext);
+
   const selectedCollection = contentTypes.find(
     (collection) => collection.id === collectionId
   );
 
   function addNewEntry() {
-    // TODO
-    console.log('add new entry');
+    const modalFields = { ...selectedCollection.schema };
+    Object.keys(modalFields).forEach((key) => {
+      modalFields[key] = '';
+    });
+
+    setModal({
+      show: true,
+      title: 'Add Response',
+      position: 'right',
+      fields: modalFields,
+      onSave: async (data) => {
+        // console.log({
+        //   form_id: selectedCollection.id,
+        //   response: data,
+        // });
+
+        try {
+          const newResponse = await makeRequest(createResponseApiEndpoint, {
+            data: {
+              form_id: selectedCollection.id,
+              response: data,
+            },
+          });
+
+          setContentTypes(
+            contentTypes.map((collection) => {
+              if (collection.id === collectionId) {
+                return {
+                  ...collection,
+                  formResponses: [...collection.formResponses, newResponse],
+                };
+              }
+              return collection;
+            })
+          );
+
+          return true;
+        } catch (err) {
+          setError(err.response ? err.response.data.message : err.message);
+          return false;
+        }
+      },
+    });
   }
 
   function editResponse(id) {

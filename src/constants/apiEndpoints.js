@@ -27,3 +27,8 @@ export const createFormApiEndpoint = {
   url: BACKEND_SERVER_BASE_URL + '/api/forms',
   method: 'POST',
 };
+
+export const createResponseApiEndpoint = {
+  url: BACKEND_SERVER_BASE_URL + '/api/form-responses',
+  method: 'POST',
+};
