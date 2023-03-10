@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HomePage should render collection on collections click 1`] = `
+<DocumentFragment>
+  <div
+    class="home-page"
+  >
+    <div
+      class="cms-nav"
+    >
+      <h1>
+        CMS+
+      </h1>
+      <br />
+      <div
+        class="collections-containers"
+      >
+        <h3>
+          COLLECTIONS
+        </h3>
+        <br />
+        <ul
+          style="display: flex; flex-direction: column; gap: 8px; max-height: 45vh;"
+        >
+          <li
+            style="cursor: pointer; background-color: transparent;"
+          >
+            • Laptops
+          </li>
+        </ul>
+        <br />
+      </div>
+      <h3
+        class="build-type-button"
+        style="background-color: transparent; cursor: pointer;"
+      >
+        CONTENT TYPE BUILDER
+      </h3>
+    </div>
+    <div
+      class="cms-content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`HomePage should render content type on content type builder click 1`] = `
+<DocumentFragment>
+  <div
+    class="home-page"
+  >
+    <div
+      class="cms-nav"
+    >
+      <h1>
+        CMS+
+      </h1>
+      <br />
+      <div
+        class="collections-containers"
+      >
+        <h3>
+          COLLECTIONS
+        </h3>
+        <br />
+        <ul
+          style="display: flex; flex-direction: column; gap: 8px; max-height: 45vh;"
+        >
+          <li
+            style="cursor: pointer; background-color: transparent;"
+          >
+            • Laptops
+          </li>
+        </ul>
+        <br />
+      </div>
+      <h3
+        class="build-type-button"
+        style="background-color: transparent; cursor: pointer;"
+      >
+        CONTENT TYPE BUILDER
+      </h3>
+    </div>
+    <div
+      class="cms-content"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`HomePage should render the collections 1`] = `
+<DocumentFragment>
+  <div
+    class="home-page"
+  >
+    <div
+      class="cms-nav"
+    >
+      <h1>
+        CMS+
+      </h1>
+      <br />
+      <div
+        class="collections-containers"
+      >
+        <h3>
+          COLLECTIONS
+        </h3>
+        <br />
+        <ul
+          style="display: flex; flex-direction: column; gap: 8px; max-height: 45vh;"
+        >
+          <li
+            style="cursor: pointer; background-color: transparent;"
+          >
+            • Laptops
+          </li>
+        </ul>
+        <br />
+      </div>
+      <h3
+        class="build-type-button"
+        style="background-color: transparent; cursor: pointer;"
+      >
+        CONTENT TYPE BUILDER
+      </h3>
+    </div>
+    <div
+      class="cms-content"
+    />
+  </div>
+</DocumentFragment>
+`;

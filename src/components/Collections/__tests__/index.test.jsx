@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Collections from '..';
@@ -27,5 +27,30 @@ describe('Collections', () => {
       </ErrorContext.Provider>
     );
     expect(asFragment()).toMatchSnapshot();
+  });
+
+  it('should render correctly after clicking on type button', async () => {
+    const navigate = jest.fn();
+    useNavigate.mockReturnValue(navigate);
+
+    const error = 'some error';
+    const setError = jest.fn();
+
+    const collections = mockCollections;
+    const setCollections = jest.fn();
+
+    const view = render(
+      <ErrorContext.Provider value={[error, setError]}>
+        <ContentContext.Provider value={[collections, setCollections]}>
+          <Collections collectionId={mockCollections[0].id} />
+        </ContentContext.Provider>
+      </ErrorContext.Provider>
+    );
+
+    const typeButton = view.getByText(mockCollections[0].name);
+    fireEvent.click(typeButton);
+
+    // await waitFor(() => {});
+    expect(view.asFragment()).toMatchSnapshot();
   });
 });

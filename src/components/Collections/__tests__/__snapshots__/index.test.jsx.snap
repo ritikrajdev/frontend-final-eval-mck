@@ -113,3 +113,117 @@ exports[`Collections should render correctly 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Collections should render correctly after clicking on type button 1`] = `
+<DocumentFragment>
+  <div
+    class="collections"
+  >
+    <h2>
+      <span>
+        Laptops
+      </span>
+       
+      <button
+        class="sign-out-button"
+      >
+        Sign Out
+      </button>
+    </h2>
+    <br />
+    <div
+      style="padding: 20px;"
+    >
+      <div
+        class="entries"
+      >
+        <h1>
+          2 Entries Found
+        </h1>
+        <button>
+          Add a new entry
+        </button>
+      </div>
+      <div
+        class="entries-table"
+      >
+        <div
+          class="entries-headings"
+        >
+          <div
+            class="w-150"
+          >
+            id
+          </div>
+          <div
+            class="w-150"
+          >
+            brand
+          </div>
+          <div
+            style="margin-left: auto;"
+          >
+            Actions
+          </div>
+        </div>
+        <div
+          class="entries-row"
+        >
+          <div
+            class="w-150"
+          >
+            8
+          </div>
+          <div
+            class="w-150"
+          >
+            dell
+          </div>
+          <div
+            style="margin-left: auto; display: flex; gap: 12px;"
+          >
+            <button>
+              <i
+                class="fa-regular fa-pen-to-square"
+              />
+            </button>
+            <button>
+              <i
+                class="fa-regular fa-trash-can"
+              />
+            </button>
+          </div>
+        </div>
+        <div
+          class="entries-row"
+        >
+          <div
+            class="w-150"
+          >
+            4
+          </div>
+          <div
+            class="w-150"
+          >
+            apple
+          </div>
+          <div
+            style="margin-left: auto; display: flex; gap: 12px;"
+          >
+            <button>
+              <i
+                class="fa-regular fa-pen-to-square"
+              />
+            </button>
+            <button>
+              <i
+                class="fa-regular fa-trash-can"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
