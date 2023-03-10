@@ -7,6 +7,7 @@ import { ContentContext } from '../../contexts/ContentContext';
 import { ErrorContext } from '../../contexts/ErrorContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { makeRequest } from '../../utils/makeRequest';
+import SignOutButton from '../SignOutButton';
 
 import './ContentTypes.css';
 
@@ -252,7 +253,9 @@ export default function ContentTypes() {
 
   return (
     <div className='content-types'>
-      <h2>Content Types</h2>
+      <h2>
+        <span>Content Types</span> <SignOutButton />
+      </h2>
       <div className='types-container'>
         <div className='left-container'>
           <p>{contentTypes.length} Types</p>

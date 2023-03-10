@@ -9,6 +9,7 @@ import { ContentContext } from '../../contexts/ContentContext';
 import { ErrorContext } from '../../contexts/ErrorContext';
 import { ModalContext } from '../../contexts/ModalContext';
 import { makeRequest } from '../../utils/makeRequest';
+import SignOutButton from '../SignOutButton';
 
 import './Collections.css';
 
@@ -141,7 +142,9 @@ export default function Collections({ collectionId }) {
 
   return (
     <div className='collections'>
-      <h2>{selectedCollection.name}</h2>
+      <h2>
+        <span>{selectedCollection.name}</span> <SignOutButton />
+      </h2>
       <br />
       <div
         style={{

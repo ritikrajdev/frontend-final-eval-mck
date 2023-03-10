@@ -1,6 +1,8 @@
 .content-types h2 {
   padding: 24px 20px;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
 }
 
 .types-container {
